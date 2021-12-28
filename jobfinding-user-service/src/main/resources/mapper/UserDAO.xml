@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ <mapper namespace="org.csu.userservice.dao.UserDAO">
+    <resultMap id="BaseResultMap" type="org.csu.userservice.domain.UserPerson">
+        <result column="tel" property="telephone" jdbcType="VARCHAR"></result>
+        <result column="email" property="email" jdbcType="VARCHAR"></result>
+        <result column="pwd" property="password" jdbcType="VARCHAR"></result>
+        <result column="typ" property="type" jdbcType="INTEGER"></result>
+    </resultMap>
+    <select id="findUserPersonByEmailAndPwd" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT * FROM user_person
+        WHERE email = ${param1}
+        AND  pwd = ${param2}
+    </select>
+
+    <select id="insertUserPerson" parameterType="org.csu.userservice.domain.UserPerson">
+        INSERT INTO user_person(tel, email, pwd, typ)
+        VALUES (#{telephone}, #{email}, #{password}, #{type})
+    </select>
+
+    <insert id="insertUserCompany" parameterType="org.csu.userservice.domain.UserPerson">
+        INSERT INTO user_company(email, pwd, typ)
+        VALUES (#{email}, #{password}, #{type})
+    </insert>
+
+</mapper>

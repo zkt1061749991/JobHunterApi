@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ <mapper namespace="org.csu.Information.dao.InformationDAO">
+    <resultMap id="ResumeResultMap" type="org.csu.Information.domain.AdminResume">
+        <result column="tel" property="telephone" jdbcType="VARCHAR"></result>
+        <result column="name" property="name" jdbcType="VARCHAR"></result>
+        <result column="email" property="email" jdbcType="VARCHAR"></result>
+        <result column="sex" property="sex" jdbcType="VARCHAR"></result>
+        <result column="birth" property="birthDate" jdbcType="VARCHAR"></result>
+        <result column="apartment" property="city" jdbcType="VARCHAR"></result>
+        <result column="school" property="school" jdbcType="VARCHAR"></result>
+        <result column="education" property="education" jdbcType="VARCHAR"></result>
+        <result column="major" property="major" jdbcType="VARCHAR"></result>
+        <result column="description" property="desc" jdbcType="VARCHAR"></result>
+        <result column="want_salary" property="wantSalary" jdbcType="VARCHAR"></result>
+        <result column="want_job" property="wantJob" jdbcType="VARCHAR"></result>
+        <result column="want_city" property="wantCity" jdbcType="VARCHAR"></result>
+        <result column="c_state" property="state" jdbcType="VARCHAR"></result>
+        <result column="c_salary" property="salary" jdbcType="VARCHAR"></result>
+        <result column="l_language" property="language" jdbcType="VARCHAR"></result>
+        <result column="l_os" property="os" jdbcType="VARCHAR"></result>
+        <result column="l_feature" property="feature" jdbcType="VARCHAR"></result>
+        <result column="b_company" property="bCompany" jdbcType="VARCHAR"></result>
+        <result column="b_job" property="bJob" jdbcType="VARCHAR"></result>
+        <result column="b_time" property="bTime" jdbcType="VARCHAR"></result>
+        <result column="b_duty" property="bDuty" jdbcType="VARCHAR"></result>
+        <result column="p_name" property="pName" jdbcType="VARCHAR"></result>
+        <result column="p_time" property="pTime" jdbcType="VARCHAR"></result>
+        <result column="p_desc" property="pDesc" jdbcType="VARCHAR"></result>
+    </resultMap>
+
+    <select id="updateAdminState" parameterType="org.csu.Information.domain.AdminResume">
+        INSERT INTO resume(email, want_city, want_salary, c_state, c_salary)
+        VALUES (#{email},#{wantCity},#{wantSalary},#{state},#{salary})
+        ON duplicate KEY UPDATE want_city=#{wantCity}, want_salary=#{wantSalary}, c_state=#{state}, c_salary=#{salary}
+    </select>
+    <select id="insertAdminInfo" parameterType="org.csu.Information.domain.AdminResume">
+        INSERT INTO resume(tel, name, email, sex, birth, apartment)
+        VALUES (#{telephone}, #{name}, #{email}, #{sex}, #{birthDate}, #{city})
+        ON duplicate KEY UPDATE tel = #{telephone}, name = #{name}, sex=#{sex}, birth=#{birthDate}, apartment=#{city}
+    </select>
+</mapper>
